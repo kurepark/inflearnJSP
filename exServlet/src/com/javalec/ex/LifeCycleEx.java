@@ -1,6 +1,9 @@
 package com.javalec.ex;
 
 import java.io.IOException;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,16 +41,30 @@ public class LifeCycleEx extends HttpServlet {
 		System.out.println("doPost");
 	}
 	
-	@Override
+	@Override //실행2번
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("init");
 	}
 	
-	@Override
+	@Override //실행3
 	public void destroy() {
 		// TODO Auto-generated method stub
 		System.out.println("destroy");
+	}
+	
+	//선처리작업, init, destroy처럼 오버라이딩이 아닌 임의의 메소드를 만들고 어노테이션을 사용한다
+	@PostConstruct //실행1번
+	private void initPostConstruct() {
+		// TODO Auto-generated method stub
+		System.out.println("initPostConstruct");
+	}
+	
+	//자원해제 후 후처리.
+	@PreDestroy //실행4
+	private void destroyPreDestroy() {
+		// TODO Auto-generated method stub
+		System.out.println("destroyPreDestroy");
 	}
 
 }
